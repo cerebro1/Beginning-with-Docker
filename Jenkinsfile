@@ -5,7 +5,7 @@ pipeline {
     stages {
       stage('Build') {
         steps {
-          sh 'docker-compose up'
+          sh '/home/sonalis/.local/bin/docker-compose up'
         }
       }
     }
