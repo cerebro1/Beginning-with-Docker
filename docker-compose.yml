@@ -1,0 +1,12 @@
+version: '3.7'
+services:
+  trainer:
+    build: .
+    privileged: true
+    user: root
+    container_name: trainer1
+  trainee:
+    image: alpine:latest
+    privileged: true
+    user: root
+    container_name: trainee
