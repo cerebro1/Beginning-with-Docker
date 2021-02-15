@@ -1,0 +1,86 @@
+Started by user unknown or anonymous
+Obtained Jenkinsfile from git https://github.com/cerebro1/Beginning-with-Docker
+Running in Durability level: MAX_SURVIVABILITY
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/JD2
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+using credential sonalis
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/cerebro1/Beginning-with-Docker # timeout=10
+Fetching upstream changes from https://github.com/cerebro1/Beginning-with-Docker
+ > git --version # timeout=10
+ > git --version # 'git version 2.11.0'
+using GIT_SSH to set credentials 
+ > git fetch --tags --progress -- https://github.com/cerebro1/Beginning-with-Docker +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse origin/main^{commit} # timeout=10
+Checking out Revision 8d9e8eb01e81023c217617bdd263d968336cff92 (origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 8d9e8eb01e81023c217617bdd263d968336cff92 # timeout=10
+Commit message: "mentioned alpine edge repository testing branch"
+ > git rev-list --no-walk b50ac269557d116ab3cf9db7fa16ca5fcf49c654 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Build)
+[Pipeline] sh
++ /usr/local/bin/docker-compose up
+Building trainer
+Step 1/4 : FROM alpine:edge
+ ---> 34dac7805320
+Step 2/4 : RUN apk update && apk add tmux
+ ---> Using cache
+ ---> 4d8e0a1b8e10
+Step 3/4 : RUN apk add --upgrade mdp --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
+ ---> Running in 3d7fa08bcd33
+fetch http://dl-cdn.alpinelinux.org/alpine/edge/testing/x86_64/APKINDEX.tar.gz
+(1/1) Installing mdp (1.0.15-r0)
+Executing busybox-1.33.0-r2.trigger
+OK: 8 MiB in 19 packages
+Removing intermediate container 3d7fa08bcd33
+ ---> 3d28282fd2ed
+Step 4/4 : RUN apk add --update openssh
+ ---> Running in 0fc520a2f62b
+fetch https://dl-cdn.alpinelinux.org/alpine/edge/main/x86_64/APKINDEX.tar.gz
+fetch https://dl-cdn.alpinelinux.org/alpine/edge/community/x86_64/APKINDEX.tar.gz
+(1/7) Installing openssh-keygen (8.4_p1-r3)
+(2/7) Installing libedit (20191231.3.1-r1)
+(3/7) Installing openssh-client (8.4_p1-r3)
+(4/7) Installing openssh-sftp-server (8.4_p1-r3)
+(5/7) Installing openssh-server-common (8.4_p1-r3)
+(6/7) Installing openssh-server (8.4_p1-r3)
+(7/7) Installing openssh (8.4_p1-r3)
+Executing busybox-1.33.0-r2.trigger
+OK: 13 MiB in 26 packages
+Removing intermediate container 0fc520a2f62b
+ ---> 83091a616cdd
+
+Successfully built 83091a616cdd
+Successfully tagged jd2_trainer:latest
+Image for service trainer was built because it did not already exist. To rebuild this image you must use `docker-compose build` or `docker-compose up --build`.
+Creating trainer1 ... 
+Creating trainee  ... 
+[2A[2K
+Creating trainer1 ... [32mdone[0m
+[2B[1A[2K
+Creating trainee  ... [32mdone[0m
+[1BAttaching to trainer1, trainee
+[33mtrainer1 exited with code 0
+[0m[36mtrainee exited with code 0
+[0m
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
